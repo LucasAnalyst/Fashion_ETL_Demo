@@ -5,24 +5,22 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-0M2CM75"
   DTS:CreatorName="DESKTOP-0M2CM75\NGSCAdmin"
-  DTS:DTSID="{710FB648-85EE-4F8B-99E1-61E9A59E67B5}"
+  DTS:DTSID="{83CDAA5D-BC92-46AD-BEF1-FBCC3F8CE173}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.2"
   DTS:LocaleID="1033"
   DTS:ObjectName="Load_Stg_Products"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{E26346A9-E149-4DCB-B73C-8E75337499A8}">
+  DTS:VersionBuild="58"
+  DTS:VersionGUID="{731B13DE-73C0-42E1-98A0-C755609728FA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[CM_FF_SourceFileName]"
+      DTS:refId="Package.ConnectionManagers[CM_FF_CUSTOMERS]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{8A422AC7-EB2D-46D1-9D3D-7C68D8E120AA}"
-      DTS:ObjectName="CM_FF_SourceFileName">
-      <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[User::SourceFilePath]</DTS:PropertyExpression>
+      DTS:DTSID="{4C6DC7F2-E2AB-4CE2-A2F6-539A67F61C4B}"
+      DTS:ObjectName="CM_FF_CUSTOMERS">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -32,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="D:\PROJECT\DATA\products.csv">
+          DTS:ConnectionString="D:\PROJECT\DATA\customers.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -40,8 +38,8 @@
               DTS:MaximumWidth="50"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="Product_ID"
-              DTS:DTSID="{088E6824-9E41-4DF3-BE2E-5CC793E261C2}"
+              DTS:ObjectName="Customer_ID"
+              DTS:DTSID="{1048CEE1-32C4-414C-BC65-BABBB39EDA77}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -49,8 +47,8 @@
               DTS:MaximumWidth="50"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="Product_Name"
-              DTS:DTSID="{CFCADD37-0E6F-49A3-A494-62E13F2E2331}"
+              DTS:ObjectName="Name"
+              DTS:DTSID="{5265A02F-625F-4CF2-B3F1-84283C2C7B48}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -58,39 +56,27 @@
               DTS:MaximumWidth="50"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="Category"
-              DTS:DTSID="{B63125DE-708B-4B06-BCB6-A1332C6DB9E4}"
+              DTS:ObjectName="Gender"
+              DTS:DTSID="{96F70D1B-15DA-474C-96A1-12FD9525C530}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:DataType="131"
-              DTS:DataPrecision="18"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="Price"
-              DTS:DTSID="{CF2372CB-DF17-4735-A8FF-4ECC7C08564D}"
+              DTS:ObjectName="Age_Group"
+              DTS:DTSID="{EF2210FC-863B-483B-9AC8-C54468B41F39}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}"
-      DTS:ObjectName="DESKTOP-0M2CM75.FashionDW_DEV">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-0M2CM75;Initial Catalog=FashionDW_DEV;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Load_Stg_Products-{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}DESKTOP-0M2CM75.FashionDW_DEV;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{13D0A338-8886-447B-AB28-0F35068F4B6C}"
+      DTS:DTSID="{48474BB9-F04D-4680-AB57-9CC97E051CBF}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="AuditID">
@@ -99,18 +85,18 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{E0556F62-5ACE-44D1-A385-595142F179C4}"
+      DTS:DTSID="{6FE4177A-EBB0-4903-9872-DA95226A4F84}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[System::StartTime]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="EndTime">
       <DTS:VariableValue
-        DTS:DataType="7">7/15/2025 9:21:19 AM</DTS:VariableValue>
+        DTS:DataType="7">7/15/2025 1:12:18 PM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{70D48713-2961-4BAB-ADCB-DC4F84E73891}"
+      DTS:DTSID="{B0D61177-1E4D-4EFE-B50B-A95DB11F9796}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ErrorMessage">
@@ -120,16 +106,16 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C633C4D7-35F8-4A1B-9D23-02ADC9568C94}"
+      DTS:DTSID="{CDC57EEE-F807-4AF5-9A42-08831DF77AC7}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="PackageName">
       <DTS:VariableValue
-        DTS:DataType="8">Load_Stg_Product</DTS:VariableValue>
+        DTS:DataType="8">Load_Stg_Customer</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C1EA8166-8B22-4D94-BC27-0E30A81C7898}"
+      DTS:DTSID="{E357F6A6-C342-4942-A61C-84D184F825B1}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowCount">
@@ -138,27 +124,27 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{63377610-0B8D-43E2-B336-7488B398FCAB}"
+      DTS:DTSID="{D0ACAD65-B1A7-41A0-AB05-5E3412AD70C0}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceFileName">
       <DTS:VariableValue
-        DTS:DataType="8">products.csv</DTS:VariableValue>
+        DTS:DataType="8">customers.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{7663561C-8C2D-4499-BE7D-BFE3F4D131CE}"
+      DTS:DTSID="{76DB5ADF-1597-40B5-9DD8-D4DD217C0298}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::SourceFolderPath] + @[User::SourceFileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceFilePath">
       <DTS:VariableValue
-        DTS:DataType="8">D:\PROJECT\DATA\products.csv</DTS:VariableValue>
+        DTS:DataType="8">D:\PROJECT\DATA\customers.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2EF940A1-723A-444E-9C64-5A523436C5B8}"
+      DTS:DTSID="{28DCF7E9-F1DF-4FE3-BBA6-8FEE8F8210BE}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceFolderPath">
@@ -167,32 +153,32 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4F853E75-F331-4ADD-B1CE-5031702C9450}"
+      DTS:DTSID="{F46048ED-5EED-4672-B50B-ED519B67734E}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[System::StartTime]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="StartTime">
       <DTS:VariableValue
-        DTS:DataType="7">7/15/2025 9:21:19 AM</DTS:VariableValue>
+        DTS:DataType="7">7/15/2025 1:12:18 PM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{1335A230-0691-445A-A998-D8DD6E8005FE}"
+      DTS:DTSID="{FE9AE4E7-D899-434B-ABC0-285378C0760E}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="TargetTable">
       <DTS:VariableValue
-        DTS:DataType="8">STG.PRODUCT</DTS:VariableValue>
+        DTS:DataType="8">STG.CUSTOMER</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F7FEBE93-AABD-4782-B715-3540E850D50F}"
+      DTS:DTSID="{D9B91781-9126-4A7F-AA5B-6F2A2C0819C3}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="TaskName">
       <DTS:VariableValue
-        DTS:DataType="8">Load Product</DTS:VariableValue>
+        DTS:DataType="8">Load Customer</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -200,7 +186,7 @@
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{A7F44A7F-D3B3-4F29-B8BF-DD776DB0DA5D}"
+      DTS:DTSID="{0E405606-B772-4DA7-B586-5181432FAC46}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -210,12 +196,12 @@
           DTS:refId="Package\Sequence Container\End Audit Log"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{60A225C7-F84B-45DF-98BD-983FED691C6C}"
+          DTS:DTSID="{7EBA61CE-652A-42AA-AD9C-33CCEFB790FB}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="End Audit Log"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -240,12 +226,12 @@
           DTS:refId="Package\Sequence Container\Expression Task End Time"
           DTS:CreationName="Microsoft.ExpressionTask"
           DTS:Description="Expression Task"
-          DTS:DTSID="{39BC8A89-962E-4597-827F-B2487646E742}"
+          DTS:DTSID="{5799EE09-473A-43A6-A1EF-6F3598545E4D}"
           DTS:ExecutableType="Microsoft.ExpressionTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Expression Task End Time"
           DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExpressionTask
@@ -253,20 +239,20 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT"
+          DTS:refId="Package\Sequence Container\INSERT STG CUSTOMER"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{4913D865-7726-4628-91C6-B0A6425E1128}"
+          DTS:DTSID="{B8930D35-0CD2-4E6F-BF71-7F819EEBF8BD}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
-          DTS:ObjectName="INSERT STG_PRODUCT"
+          DTS:ObjectName="INSERT STG CUSTOMER"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:EventHandlers>
             <DTS:EventHandler
-              DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]"
+              DTS:refId="Package\Sequence Container\INSERT STG CUSTOMER.EventHandlers[OnError]"
               DTS:CreationName="OnError"
-              DTS:DTSID="{8F2D23AA-AA0C-4A77-99F8-7DE214FAFDAD}"
+              DTS:DTSID="{4AA6F261-8A06-4D71-9183-42212E481EE8}"
               DTS:EventID="8388720"
               DTS:EventName="OnError"
               DTS:LocaleID="-1">
@@ -274,7 +260,7 @@
                 <DTS:Variable
                   DTS:CreationName=""
                   DTS:Description="The propagate property of the event"
-                  DTS:DTSID="{133D28A0-E79C-477C-8BF7-EE00D9712BE5}"
+                  DTS:DTSID="{8024DB30-B308-4327-AC94-175947B89B33}"
                   DTS:IncludeInDebugDump="6789"
                   DTS:Namespace="System"
                   DTS:ObjectName="Propagate">
@@ -284,10 +270,10 @@
               </DTS:Variables>
               <DTS:Executables>
                 <DTS:Executable
-                  DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]\Capture Error Message"
+                  DTS:refId="Package\Sequence Container\INSERT STG CUSTOMER.EventHandlers[OnError]\Capture Error Message"
                   DTS:CreationName="Microsoft.ScriptTask"
                   DTS:Description="Script Task"
-                  DTS:DTSID="{17F100D5-D410-40EB-B80F-5A31BBFCABDA}"
+                  DTS:DTSID="{6789B44A-5B44-4760-9FDC-4157416CB532}"
                   DTS:ExecutableType="Microsoft.ScriptTask"
                   DTS:LocaleID="-1"
                   DTS:ObjectName="Capture Error Message">
@@ -301,14 +287,35 @@
                       ReadOnlyVariables="System::ErrorDescription"
                       ReadWriteVariables="User::ErrorMessage">
                       <ProjectItem
-                        Name="Properties\Settings.settings"
-                        Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                        Name="Properties\AssemblyInfo.cs"
+                        Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_90fd0e646d7f4b639f313c02550758b5")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_90fd0e646d7f4b639f313c02550758b5")]
+[assembly: AssemblyCopyright("Copyright @  2025")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
                       <ProjectItem
                         Name="Properties\Resources.resx"
                         Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -695,35 +702,14 @@ namespace ST_90fd0e646d7f4b639f313c02550758b5.Properties {
     }
 }]]></ProjectItem>
                       <ProjectItem
-                        Name="Properties\AssemblyInfo.cs"
-                        Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_90fd0e646d7f4b639f313c02550758b5")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_90fd0e646d7f4b639f313c02550758b5")]
-[assembly: AssemblyCopyright("Copyright @  2025")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                        Name="Properties\Settings.settings"
+                        Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
                       <ProjectItem
                         Name="Properties\Resources.Designer.cs"
                         Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -912,7 +898,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
               version="1">
               <components>
                 <component
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column"
                   componentClassID="Microsoft.DerivedColumn"
                   contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
@@ -920,7 +906,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   usesDispositions="true">
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Inputs[Derived Column Input]"
                       description="Input to the Derived Column Transformation"
                       name="Derived Column Input">
                       <externalMetadataColumns />
@@ -928,18 +914,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Output]"
                       description="Default Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       name="Derived Column Output"
-                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
                           name="ETL_DATE"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -960,23 +946,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <externalMetadataColumns />
                     </output>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Error Output]"
                       description="Error Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="Derived Column Error Output"
-                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -985,12 +971,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer"
                   componentClassID="Microsoft.FlatFileSource"
                   contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
                   description="Flat File Source"
                   localeId="1033"
-                  name="Flat File Source Product"
+                  name="Flat File Source Customer"
                   usesDispositions="true"
                   version="1">
                   <properties>
@@ -1005,26 +991,26 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Connections[FlatFileConnection]"
-                      connectionManagerID="Package.ConnectionManagers[CM_FF_SourceFileName]"
-                      connectionManagerRefId="Package.ConnectionManagers[CM_FF_SourceFileName]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CM_FF_CUSTOMERS]"
+                      connectionManagerRefId="Package.ConnectionManagers[CM_FF_CUSTOMERS]"
                       name="FlatFileConnection" />
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output]"
                       name="Flat File Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Customer_ID]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Customer_ID]"
                           length="50"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
-                          name="Product_ID"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Customer_ID]"
+                          name="Customer_ID"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
@@ -1038,15 +1024,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Name]"
                           length="50"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
-                          name="Product_Name"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Name]"
+                          name="Name"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
@@ -1060,15 +1046,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Gender]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Gender]"
                           length="50"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
-                          name="Category"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Gender]"
+                          name="Gender"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
@@ -1082,14 +1068,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
-                          dataType="numeric"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Age_Group]"
+                          codePage="1252"
+                          dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
-                          name="Price"
-                          precision="18"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Age_Group]"
+                          length="50"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Age_Group]"
+                          name="Age_Group"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
@@ -1106,52 +1093,53 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Customer_ID]"
                           codePage="1252"
                           dataType="str"
                           length="50"
-                          name="Product_ID" />
+                          name="Customer_ID" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Name]"
                           codePage="1252"
                           dataType="str"
                           length="50"
-                          name="Product_Name" />
+                          name="Name" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Gender]"
                           codePage="1252"
                           dataType="str"
                           length="50"
-                          name="Category" />
+                          name="Gender" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
-                          dataType="numeric"
-                          name="Price"
-                          precision="18" />
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].ExternalColumns[Age_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Age_Group" />
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output]"
                       isErrorOut="true"
                       name="Flat File Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           codePage="1252"
                           dataType="text"
                           description="Flat File Source Error Output Column"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           name="Flat File Source Error Output Column" />
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1160,7 +1148,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count"
                   componentClassID="Microsoft.RowCount"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
@@ -1173,7 +1161,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -1181,19 +1169,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Outputs[Row Count Output 1]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
-                  name="STG_PRODUCT"
+                  name="STG CUSTOMER"
                   usesDispositions="true"
                   version="4">
                   <properties>
@@ -1204,7 +1192,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[STG].[Product]</property>
+                      name="OpenRowset">[STG].[Customer]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1246,109 +1234,110 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
-                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Connections[OleDbConnection]"
+                      connectionManagerID="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Category]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="Category"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]" />
-                        <inputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Price]"
-                          cachedDataType="numeric"
-                          cachedName="Price"
-                          cachedPrecision="18"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]" />
-                        <inputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_Name]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="Product_Name"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]" />
-                        <inputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_ID]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="Product_ID"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]" />
-                        <inputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[ETL_DATE]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].Columns[ETL_DATE]"
                           cachedDataType="dbTimeStamp"
                           cachedName="ETL_DATE"
-                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].Columns[Customer_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Customer_ID"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Customer_ID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].Columns[Name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Name"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Name]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].Columns[Gender]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Gender"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Gender]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].Columns[Age_Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Age_Group"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Age_Group]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output].Columns[Age_Group]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
                           codePage="1252"
                           dataType="str"
                           length="50"
-                          name="ProductID" />
+                          name="Customer_ID" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
                           codePage="1252"
                           dataType="str"
-                          length="255"
-                          name="ProductName" />
+                          length="50"
+                          name="Name" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
                           codePage="1252"
                           dataType="str"
-                          length="100"
-                          name="Category" />
+                          length="50"
+                          name="Gender" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
-                          dataType="numeric"
-                          name="Price"
-                          precision="18"
-                          scale="2" />
-                        <externalMetadataColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
-                          dataType="dbTimeStamp"
-                          name="CreatedDate" />
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input].ExternalColumns[Age_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Age_Group" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1359,20 +1348,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Derived Column Output]"
-                  endId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER.Inputs[OLE DB Destination Input]"
                   name="Derived Column Output"
-                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output]" />
+                  startId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Flat File Source Output]"
-                  endId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count.Inputs[Row Count Input 1]"
                   name="Flat File Source Output"
-                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output]" />
+                  startId="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer.Outputs[Flat File Source Output]" />
                 <path
-                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Row Count Output 1]"
-                  endId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]"
+                  refId="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Row Count Output 1]"
+                  endId="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
-                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Sequence Container\INSERT STG CUSTOMER\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1381,12 +1370,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:refId="Package\Sequence Container\Log Failure to Audit Log"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{20EF7BD6-C184-4D7A-B203-CC8502FDE8B0}"
+          DTS:DTSID="{B3CEC87F-F542-4272-B122-D0BA3B5272ED}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Log Failure to Audit Log"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1411,7 +1400,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:refId="Package\Sequence Container\Start Audit Log"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{E39CD6F4-8332-4F55-BF23-BB3B35C4C00F}"
+          DTS:DTSID="{6684D7F8-C62E-45B0-B2D7-F2FB452AFAEC}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Start Audit Log"
@@ -1454,20 +1443,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
+          DTS:refId="Package\Sequence Container\TRUNCATE TABLE STG CUSTOMER"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{f82eb446-ee0c-44e1-b90a-2939b2949982}"
+          DTS:DTSID="{65D93C26-4C5A-4192-82F4-269CFF219C42}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="TRUNCATE TABLE STG PRODUCT"
+          DTS:ObjectName="TRUNCATE TABLE STG CUSTOMER"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}"
-              SQLTask:SqlStatementSource="TRUNCATE TABLE STG.PRODUCT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="TRUNCATE TABLE STG.CUSTOMER" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -1475,31 +1464,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{100D7BB7-65FE-47D6-83CF-7FA1C25FC770}"
-          DTS:From="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
+          DTS:DTSID="{F9AAE985-D48E-47A2-9934-821C345ACD8F}"
+          DTS:From="Package\Sequence Container\TRUNCATE TABLE STG CUSTOMER"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Sequence Container\INSERT STG_PRODUCT" />
+          DTS:To="Package\Sequence Container\INSERT STG CUSTOMER" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{858D2F4B-4196-445A-A6C3-56EF03671579}"
+          DTS:DTSID="{4E1E40F1-F374-4758-A705-0A914789AE63}"
           DTS:From="Package\Sequence Container\Start Audit Log"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Sequence Container\INSERT STG_PRODUCT" />
+          DTS:To="Package\Sequence Container\INSERT STG CUSTOMER" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{788BCDD0-389A-4354-9739-437CF50D8A30}"
-          DTS:From="Package\Sequence Container\INSERT STG_PRODUCT"
+          DTS:DTSID="{C84E05E7-C118-4FA3-BB89-1FBAC47558E1}"
+          DTS:From="Package\Sequence Container\INSERT STG CUSTOMER"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
           DTS:To="Package\Sequence Container\Expression Task End Time" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{C270214A-AAB4-4280-997A-8D96E2CD0646}"
+          DTS:DTSID="{C859A436-2265-4CCC-8825-4C35FF178DB3}"
           DTS:From="Package\Sequence Container\Expression Task End Time"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
@@ -1507,8 +1496,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
-          DTS:DTSID="{6E0FCC33-C70E-4FA5-B393-23B66E5C9A6C}"
-          DTS:From="Package\Sequence Container\INSERT STG_PRODUCT"
+          DTS:DTSID="{7D6337C6-5131-40C9-9EF5-DCDE8E3BDCCD}"
+          DTS:From="Package\Sequence Container\INSERT STG CUSTOMER"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
           DTS:To="Package\Sequence Container\Log Failure to Audit Log"
@@ -1529,10 +1518,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="205,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT"
-          TopLeft="78,149" />
-        <NodeLayout
           Size="148,42"
           Id="Package\Sequence Container\End Audit Log"
           TopLeft="102.5,346.509966777409" />
@@ -1540,6 +1525,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Size="210,42"
           Id="Package\Sequence Container\Expression Task End Time"
           TopLeft="74,253" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER"
+          TopLeft="78,149" />
         <NodeLayout
           Size="195,42"
           Id="Package\Sequence Container\Log Failure to Audit Log"
@@ -1549,12 +1538,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Id="Package\Sequence Container\Start Audit Log"
           TopLeft="356,21" />
         <NodeLayout
-          Size="260,42"
-          Id="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
-          TopLeft="13.5,24" />
+          Size="268,42"
+          Id="Package\Sequence Container\TRUNCATE TABLE STG CUSTOMER"
+          TopLeft="15.5,24" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="145.583333333333,66">
+          TopLeft="149.583333333333,66">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1580,26 +1569,26 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-218.666666666667,86"
+              EndConnector="-214.666666666667,86"
               Start="0,0"
-              End="-218.666666666667,78.5">
+              End="-214.666666666667,78.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,47.2003872216844" />
+                    End="0,47.211665098777" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,47.2003872216844"
-                    Point2="0,51.2003872216844"
-                    Point3="-4,51.2003872216844" />
+                    Point1="0,47.211665098777"
+                    Point2="0,51.211665098777"
+                    Point3="-4,51.211665098777" />
                   <mssgle:LineSegment
-                    End="-214.666666666667,51.2003872216844" />
+                    End="-210.666666666667,51.211665098777" />
                   <mssgle:CubicBezierSegment
-                    Point1="-214.666666666667,51.2003872216844"
-                    Point2="-218.666666666667,51.2003872216844"
-                    Point3="-218.666666666667,55.2003872216844" />
+                    Point1="-210.666666666667,51.211665098777"
+                    Point2="-214.666666666667,51.211665098777"
+                    Point3="-214.666666666667,55.211665098777" />
                   <mssgle:LineSegment
-                    End="-218.666666666667,78.5" />
+                    End="-214.666666666667,78.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1610,7 +1599,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
-          TopLeft="179.75,191">
+          TopLeft="181.25,191">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1654,25 +1643,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
-          TopLeft="283,170">
+          TopLeft="289,170">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="49,0"
+              EndConnector="43,0"
               Start="0,0"
-              End="41.5,0">
+              End="35.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="41.5,0" />
+                    End="35.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="5.50865234375,5,30.4826953125,9.7490234375"
+              BoundingBox="2.50865234375,5,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1687,28 +1676,28 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT">
+    design-time-name="Package\Sequence Container\INSERT STG CUSTOMER">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="162,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT"
+          Size="167,42"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER"
           TopLeft="475,328" />
         <NodeLayout
-          Size="197,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product"
-          TopLeft="464,47" />
+          Size="207,42"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER\Flat File Source Customer"
+          TopLeft="458,43" />
         <NodeLayout
           Size="158,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER\Derived Column"
           TopLeft="476,234" />
         <NodeLayout
           Size="133,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT\Row Count"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER\Row Count"
           TopLeft="491,141" />
         <EdgeLayout
-          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Row Count Output 1]"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Row Count Output 1]"
           TopLeft="556.25,183">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1730,19 +1719,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Flat File Source Output]"
-          TopLeft="560,89">
+          Id="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Flat File Source Output]"
+          TopLeft="559.5,85">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52"
+              EndConnector="0,56"
               Start="0,0"
-              End="0,44.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5" />
+                    End="0,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1752,8 +1741,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Derived Column Output]"
-          TopLeft="555.5,276">
+          Id="Package\Sequence Container\INSERT STG CUSTOMER.Paths[Derived Column Output]"
+          TopLeft="556.75,276">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1777,19 +1766,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </LayoutInfo>
   </TaskHost>
   <DtsEventHandler
-    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]">
+    design-time-name="Package\Sequence Container\INSERT STG CUSTOMER.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="193,42"
-          Id="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]\Capture Error Message"
+          Id="Package\Sequence Container\INSERT STG CUSTOMER.EventHandlers[OnError]\Capture Error Message"
           TopLeft="517,161" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT">
+    design-time-name="Package\Sequence Container\INSERT STG CUSTOMER\STG CUSTOMER">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-0M2CM75.FashionDW_DEV"
+  DTS:DTSID="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DESKTOP-0M2CM75;Initial Catalog=FashionDW_DEV;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Load_Stg_Products-{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}DESKTOP-0M2CM75.FashionDW_DEV;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
