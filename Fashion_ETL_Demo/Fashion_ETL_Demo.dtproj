@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-0M2CM75</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/vvp0gUSakWsGG00bFL9EgAAAAACAAAAAAAQZgAAAAEAACAAAABtzIxBdJ4yf4g4Y8FhCK/atskoRFctMrfgsJiYL+08JgAAAAAOgAAAAAIAACAAAAB26DbKtYGOODDV5KEzZyognHkUCQPqgEdWW9E8dK6MoJAAAACX/d8z14vDL8Mo9GaPO6zo1Ef+pIY4jRlZIrklUQ7aPZCQ810kKFLGIaO6LhG/aUbFAlwFIMAdEVVMBd6Cs5dHo0sjLULX2a4xdw1i/bu6z6vWvC83ttxGNKc91cDnOku2WN07plxLDjge8HqhegRVS2LmkOtQ4klL3SDf13HUrvO5gMQ1rRpUDJ9O+eBBZFZAAAAAiwexbDSRE9vUIeYj28KTgqgJ2vEnz/qdT/Pith5t1E+x8UMtmZ52WY8+ucjo2yiuuzk8GoS2/OBVNYtqM7KvDA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/vvp0gUSakWsGG00bFL9EgAAAAACAAAAAAAQZgAAAAEAACAAAACiXHCBGYSey9YMbE9GEuEvALBdD/n8mmLti4FiFXTwVwAAAAAOgAAAAAIAACAAAAB6lNVH9KLXf4mpFZMwm1MxJj20cwQStXyrY24lyZXG/pAAAABqXNEe95oPqbtPyk5Eak5px9YK27z+ymbmas2Db1eqsYokB4dP08dPE701VWsAQMDvqPiyBCG/Bc8+0sdpxQGw4xjBh5/MxcS4JbO9dsE3WHq0qy9fQXSin37Up18zcZ5nzHxaqrVvSFMsp+SwSfHEo4YWhrT8W4lETyVT2A08+7ibWXUQ49hNDG271kXHiiJAAAAAHmCZ4yxn/kAzs/g1FGo6AroRYb2hu/5XKHbPslRqx4F0+iB5AFVmcypmpbmNTrX/u0NMKmrBfnPlBKs6+I+cHA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -36,6 +36,7 @@
           <SSIS:Package SSIS:Name="ETL_DAILY.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Load_Stg_Sale.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Load_Stg_Date.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="LOAD_DW_DIM_PRODUCT.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="FashionDW_DEV.conmgr" />
@@ -860,17 +861,17 @@
                 <SSIS:Property SSIS:Name="Name">Load_Stg_Sale</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">65</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">66</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{94F346B8-6EEB-4EE0-ACE7-438A521E793A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{9B14E350-ED14-4720-998A-F92395926B14}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.AlwaysCheckForRowDelimiters">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.AlwaysCheckForRowDelimiters">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -885,7 +886,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.CodePage">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.CodePage">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -900,7 +901,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ColumnNamesInFirstDataRow">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.ColumnNamesInFirstDataRow">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -915,7 +916,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ConnectByProxy">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.ConnectByProxy">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -930,7 +931,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ConnectionString">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.ConnectionString">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -945,7 +946,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.DataRowsToSkip">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.DataRowsToSkip">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -960,7 +961,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.Format">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.Format">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -975,7 +976,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.HeaderRowDelimiter">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.HeaderRowDelimiter">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -991,7 +992,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.HeaderRowsToSkip">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.HeaderRowsToSkip">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1006,7 +1007,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.LocaleID">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.LocaleID">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1021,7 +1022,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.RowDelimiter">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.RowDelimiter">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1037,7 +1038,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.TextQualifier">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.TextQualifier">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1052,7 +1053,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.Unicode">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_SALES.Unicode">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1075,17 +1076,17 @@
                 <SSIS:Property SSIS:Name="Name">Load_Stg_Date</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">63</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">65</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{EB8010CA-604F-4B68-9FFF-64BC7980839A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{FAFE5DFF-79EF-43A9-A93F-254A03DCD485}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.AlwaysCheckForRowDelimiters">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.AlwaysCheckForRowDelimiters">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1100,7 +1101,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.CodePage">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.CodePage">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1115,7 +1116,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ColumnNamesInFirstDataRow">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.ColumnNamesInFirstDataRow">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1130,7 +1131,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ConnectByProxy">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.ConnectByProxy">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1145,7 +1146,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.ConnectionString">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.ConnectionString">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1156,11 +1157,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">D:\PROJECT\DATA\customers.csv</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">D:\PROJECT\DATA\dates.csv</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.DataRowsToSkip">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.DataRowsToSkip">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1175,7 +1176,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.Format">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.Format">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1190,7 +1191,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.HeaderRowDelimiter">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.HeaderRowDelimiter">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1206,7 +1207,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.HeaderRowsToSkip">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.HeaderRowsToSkip">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1221,7 +1222,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.LocaleID">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.LocaleID">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1236,7 +1237,7 @@
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.RowDelimiter">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.RowDelimiter">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1252,7 +1253,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.TextQualifier">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.TextQualifier">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1267,7 +1268,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.CM_FF_CUSTOMERS.Unicode">
+                <SSIS:Parameter SSIS:Name="CM.CM_FF_DATES.Unicode">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -1283,6 +1284,23 @@
                   </SSIS:Properties>
                 </SSIS:Parameter>
               </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="LOAD_DW_DIM_PRODUCT.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{203EAF02-65E6-4D8C-AD98-5FA2B59CF979}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{F24C85BF-7E5D-48F6-9582-BB140D629B86}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
             </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>
