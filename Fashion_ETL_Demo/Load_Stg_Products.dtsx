@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Load_Stg_Products"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{F9F49218-AA4A-43A1-A280-9A5642A43A8C}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{E26346A9-E149-4DCB-B73C-8E75337499A8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -106,7 +106,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="EndTime">
       <DTS:VariableValue
-        DTS:DataType="7">7/14/2025 4:08:23 PM</DTS:VariableValue>
+        DTS:DataType="7">7/15/2025 9:21:19 AM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -174,7 +174,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="StartTime">
       <DTS:VariableValue
-        DTS:DataType="7">7/14/2025 4:08:23 PM</DTS:VariableValue>
+        DTS:DataType="7">7/15/2025 9:21:19 AM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -207,18 +207,64 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Sequence Container\Data Flow Task"
+          DTS:refId="Package\Sequence Container\End Audit Log"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{60A225C7-F84B-45DF-98BD-983FED691C6C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="End Audit Log"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}"
+              SQLTask:SqlStatementSource="UPDATE DW.ETL_Audit_Log&#xA;SET&#xA;    [RowCount] = ?,&#xA;    [Status] = 'COMPLETED',&#xA;    EndTime = GETDATE(),&#xA;    Message = 'Load successful'&#xA;WHERE AuditID = ?;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::RowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AuditID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Expression Task End Time"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{39BC8A89-962E-4597-827F-B2487646E742}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Expression Task End Time"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::EndTime] = GETDATE()" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
           DTS:DTSID="{4913D865-7726-4628-91C6-B0A6425E1128}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Data Flow Task"
+          DTS:ObjectName="INSERT STG_PRODUCT"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:EventHandlers>
             <DTS:EventHandler
-              DTS:refId="Package\Sequence Container\Data Flow Task.EventHandlers[OnError]"
+              DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]"
               DTS:CreationName="OnError"
               DTS:DTSID="{8F2D23AA-AA0C-4A77-99F8-7DE214FAFDAD}"
               DTS:EventID="8388720"
@@ -238,7 +284,7 @@
               </DTS:Variables>
               <DTS:Executables>
                 <DTS:Executable
-                  DTS:refId="Package\Sequence Container\Data Flow Task.EventHandlers[OnError]\Capture Error Message"
+                  DTS:refId="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]\Capture Error Message"
                   DTS:CreationName="Microsoft.ScriptTask"
                   DTS:Description="Script Task"
                   DTS:DTSID="{17F100D5-D410-40EB-B80F-5A31BBFCABDA}"
@@ -255,123 +301,14 @@
                       ReadOnlyVariables="System::ErrorDescription"
                       ReadWriteVariables="User::ErrorMessage">
                       <ProjectItem
-                        Name="ScriptMain.cs"
-                        Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
-/* The Script Task allows you to perform virtually any operation that can be accomplished in
- * a .Net application within the context of an Integration Services control flow. 
- * 
- * Expand the other regions which have "Help" prefixes for examples of specific ways to use
- * Integration Services features within this script task. */
-#endregion
-
-
-#region Namespaces
-using System;
-using System.Data;
-using Microsoft.SqlServer.Dts.Runtime;
-using System.Windows.Forms;
-#endregion
-
-namespace ST_90fd0e646d7f4b639f313c02550758b5
-{
-    /// <summary>
-    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
-    /// or parent of this class.
-    /// </summary>
-	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
-	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-	{
-        #region Help:  Using Integration Services variables and parameters in a script
-        /* To use a variable in this script, first ensure that the variable has been added to 
-         * either the list contained in the ReadOnlyVariables property or the list contained in 
-         * the ReadWriteVariables property of this script task, according to whether or not your
-         * code needs to write to the variable.  To add the variable, save this script, close this instance of
-         * Visual Studio, and update the ReadOnlyVariables and 
-         * ReadWriteVariables properties in the Script Transformation Editor window.
-         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
-         * 
-         * Example of reading from a variable:
-         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
-         * 
-         * Example of writing to a variable:
-         *  Dts.Variables["User::myStringVariable"].Value = "new value";
-         * 
-         * Example of reading from a package parameter:
-         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
-         *  
-         * Example of reading from a project parameter:
-         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
-         * 
-         * Example of reading from a sensitive project parameter:
-         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
-         * */
-
-        #endregion
-
-        #region Help:  Firing Integration Services events from a script
-        /* This script task can fire events for logging purposes.
-         * 
-         * Example of firing an error event:
-         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
-         * 
-         * Example of firing an information event:
-         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
-         * 
-         * Example of firing a warning event:
-         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
-         * */
-        #endregion
-
-        #region Help:  Using Integration Services connection managers in a script
-        /* Some types of connection managers can be used in this script task.  See the topic 
-         * "Working with Connection Managers Programatically" for details.
-         * 
-         * Example of using an ADO.Net connection manager:
-         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
-         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
-         *  //Use the connection in some code here, then release the connection
-         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
-         *
-         * Example of using a File connection manager
-         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
-         *  string filePath = (string)rawConnection;
-         *  //Use the connection in some code here, then release the connection
-         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
-         * */
-        #endregion
-
-
-		/// <summary>
-        /// This method is called when this script task executes in the control flow.
-        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
-        /// To open Help, press F1.
-        /// </summary>
-		public void Main()
-		{
-            // TODO: Add your code here
-            Dts.Variables["User::ErrorMessage"].Value = Dts.Variables["System::ErrorDescription"].Value.ToString();
-            Dts.TaskResult = (int)ScriptResults.Success;
-
-
-            Dts.TaskResult = (int)ScriptResults.Success;
-		}
-
-        #region ScriptResults declaration
-        /// <summary>
-        /// This enum provides a convenient shorthand within the scope of this class for setting the
-        /// result of the script.
-        /// 
-        /// This code was generated automatically.
-        /// </summary>
-        enum ScriptResults
-        {
-            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
-            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-        };
-        #endregion
-
-	}
-}]]></ProjectItem>
+                        Name="Properties\Settings.settings"
+                        Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
                       <ProjectItem
                         Name="Properties\Resources.resx"
                         Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -492,35 +429,6 @@ namespace ST_90fd0e646d7f4b639f313c02550758b5
   </resheader>
 </root>]]></ProjectItem>
                       <ProjectItem
-                        Name="Properties\Settings.Designer.cs"
-                        Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_90fd0e646d7f4b639f313c02550758b5.Properties.Settings.get_Default():ST_90fd0e646d7f4b639f313c02550758b5.Properties.Sett" +
-    "ings")]
-
-namespace ST_90fd0e646d7f4b639f313c02550758b5.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
-                      <ProjectItem
                         Name="ST_90fd0e646d7f4b639f313c02550758b5.csproj"
                         Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -620,6 +528,124 @@ namespace ST_90fd0e646d7f4b639f313c02550758b5.Properties {
   </ProjectExtensions>
 </Project>]]></ProjectItem>
                       <ProjectItem
+                        Name="ScriptMain.cs"
+                        Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_90fd0e646d7f4b639f313c02550758b5
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            // TODO: Add your code here
+            Dts.Variables["User::ErrorMessage"].Value = Dts.Variables["System::ErrorDescription"].Value.ToString();
+            Dts.TaskResult = (int)ScriptResults.Success;
+
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+                      <ProjectItem
                         Name="Project"
                         Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
 <c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
@@ -639,6 +665,35 @@ namespace ST_90fd0e646d7f4b639f313c02550758b5.Properties {
     <msb:File Include="ScriptMain.cs" />
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
+                      <ProjectItem
+                        Name="Properties\Settings.Designer.cs"
+                        Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_90fd0e646d7f4b639f313c02550758b5.Properties.Settings.get_Default():ST_90fd0e646d7f4b639f313c02550758b5.Properties.Sett" +
+    "ings")]
+
+namespace ST_90fd0e646d7f4b639f313c02550758b5.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
                       <ProjectItem
                         Name="Properties\AssemblyInfo.cs"
                         Encoding="UTF8"><![CDATA[using System.Reflection;
@@ -669,15 +724,6 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-                      <ProjectItem
-                        Name="Properties\Settings.settings"
-                        Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
                       <ProjectItem
                         Name="Properties\Resources.Designer.cs"
                         Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -866,7 +912,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
               version="1">
               <components>
                 <component
-                  refId="Package\Sequence Container\Data Flow Task\Derived Column"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column"
                   componentClassID="Microsoft.DerivedColumn"
                   contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
@@ -874,7 +920,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   usesDispositions="true">
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]"
                       description="Input to the Derived Column Transformation"
                       name="Derived Column Input">
                       <externalMetadataColumns />
@@ -882,18 +928,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output]"
                       description="Default Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       name="Derived Column Output"
-                      synchronousInputId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]"
                           name="ETL_DATE"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -914,23 +960,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <externalMetadataColumns />
                     </output>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output]"
                       description="Error Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="Derived Column Error Output"
-                      synchronousInputId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -939,7 +985,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\Data Flow Task\Flat File Source Product"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product"
                   componentClassID="Microsoft.FlatFileSource"
                   contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
                   description="Flat File Source"
@@ -959,25 +1005,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Connections[FlatFileConnection]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Connections[FlatFileConnection]"
                       connectionManagerID="Package.ConnectionManagers[CM_FF_SourceFileName]"
                       connectionManagerRefId="Package.ConnectionManagers[CM_FF_SourceFileName]"
                       name="FlatFileConnection" />
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output]"
                       name="Flat File Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
                           length="50"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]"
                           name="Product_ID"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -992,14 +1038,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
                           length="50"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]"
                           name="Product_Name"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -1014,14 +1060,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
                           length="50"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]"
                           name="Category"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -1036,12 +1082,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
                           dataType="numeric"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]"
                           name="Price"
                           precision="18"
                           truncationRowDisposition="FailComponent">
@@ -1060,52 +1106,52 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_ID]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Product_ID" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Product_Name]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Product_Name" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Category]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Category" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].ExternalColumns[Price]"
                           dataType="numeric"
                           name="Price"
                           precision="18" />
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output]"
                       isErrorOut="true"
                       name="Flat File Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           codePage="1252"
                           dataType="text"
                           description="Flat File Source Error Output Column"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           name="Flat File Source Error Output Column" />
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1114,7 +1160,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\Data Flow Task\Row Count"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count"
                   componentClassID="Microsoft.RowCount"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
@@ -1127,7 +1173,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -1135,15 +1181,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Sequence Container\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -1200,7 +1246,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Connections[OleDbConnection]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
                       connectionManagerRefId="Package.ConnectionManagers[DESKTOP-0M2CM75.FashionDW_DEV]"
                       description="The OLE DB runtime connection used to access the database."
@@ -1208,76 +1254,78 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Category]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Category]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Category"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Category]" />
                         <inputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Price]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Price]"
                           cachedDataType="numeric"
                           cachedName="Price"
                           cachedPrecision="18"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Price]" />
                         <inputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_Name]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_Name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Product_Name"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_Name]" />
                         <inputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_ID]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[Product_ID]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Product_ID"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output].Columns[Product_ID]" />
                         <inputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[ETL_DATE]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].Columns[ETL_DATE]"
                           cachedDataType="dbTimeStamp"
                           cachedName="ETL_DATE"
-                          externalMetadataColumnId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
-                          lineageId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]" />
+                          externalMetadataColumnId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output].Columns[ETL_DATE]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
-                          dataType="i4"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
                           name="ProductID" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
                           codePage="1252"
                           dataType="str"
                           length="255"
                           name="ProductName" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
                           codePage="1252"
                           dataType="str"
                           length="100"
                           name="Category" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
                           dataType="numeric"
                           name="Price"
                           precision="18"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
                           dataType="dbTimeStamp"
                           name="CreatedDate" />
                       </externalMetadataColumns>
@@ -1285,22 +1333,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1311,74 +1359,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\Data Flow Task.Paths[Derived Column Output]"
-                  endId="Package\Sequence Container\Data Flow Task\STG_PRODUCT.Inputs[OLE DB Destination Input]"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT.Inputs[OLE DB Destination Input]"
                   name="Derived Column Output"
-                  startId="Package\Sequence Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\Sequence Container\Data Flow Task.Paths[Flat File Source Output]"
-                  endId="Package\Sequence Container\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Inputs[Row Count Input 1]"
                   name="Flat File Source Output"
-                  startId="Package\Sequence Container\Data Flow Task\Flat File Source Product.Outputs[Flat File Source Output]" />
+                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product.Outputs[Flat File Source Output]" />
                 <path
-                  refId="Package\Sequence Container\Data Flow Task.Paths[Row Count Output 1]"
-                  endId="Package\Sequence Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  refId="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Row Count Output 1]"
+                  endId="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
-                  startId="Package\Sequence Container\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Sequence Container\INSERT STG_PRODUCT\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Sequence Container\End Audit Log"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{60A225C7-F84B-45DF-98BD-983FED691C6C}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="End Audit Log"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{5A4CF172-6BD1-44FC-9887-3AD2C8A190F6}"
-              SQLTask:SqlStatementSource="UPDATE DW.ETL_Audit_Log&#xA;SET&#xA;    [RowCount] = ?,&#xA;    [Status] = 'COMPLETED',&#xA;    EndTime = ?,&#xA;    Message = 'Load successful'&#xA;WHERE AuditID = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-              <SQLTask:ParameterBinding
-                SQLTask:ParameterName="0"
-                SQLTask:DtsVariableName="User::RowCount"
-                SQLTask:ParameterDirection="Input"
-                SQLTask:DataType="131"
-                SQLTask:ParameterSize="-1" />
-              <SQLTask:ParameterBinding
-                SQLTask:ParameterName="1"
-                SQLTask:DtsVariableName="User::EndTime"
-                SQLTask:ParameterDirection="Input"
-                SQLTask:DataType="135"
-                SQLTask:ParameterSize="-1" />
-              <SQLTask:ParameterBinding
-                SQLTask:ParameterName="2"
-                SQLTask:DtsVariableName="User::AuditID"
-                SQLTask:ParameterDirection="Input"
-                SQLTask:DataType="131"
-                SQLTask:ParameterSize="-1" />
-            </SQLTask:SqlTaskData>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Sequence Container\Expression Task End Time"
-          DTS:CreationName="Microsoft.ExpressionTask"
-          DTS:Description="Expression Task"
-          DTS:DTSID="{39BC8A89-962E-4597-827F-B2487646E742}"
-          DTS:ExecutableType="Microsoft.ExpressionTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Expression Task End Time"
-          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExpressionTask
-              Expression="@[User::EndTime] = GETDATE()" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1483,7 +1479,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:From="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Sequence Container\Data Flow Task" />
+          DTS:To="Package\Sequence Container\INSERT STG_PRODUCT" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
@@ -1491,12 +1487,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:From="Package\Sequence Container\Start Audit Log"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Sequence Container\Data Flow Task" />
+          DTS:To="Package\Sequence Container\INSERT STG_PRODUCT" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
           DTS:DTSID="{788BCDD0-389A-4354-9739-437CF50D8A30}"
-          DTS:From="Package\Sequence Container\Data Flow Task"
+          DTS:From="Package\Sequence Container\INSERT STG_PRODUCT"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
           DTS:To="Package\Sequence Container\Expression Task End Time" />
@@ -1512,7 +1508,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
           DTS:DTSID="{6E0FCC33-C70E-4FA5-B393-23B66E5C9A6C}"
-          DTS:From="Package\Sequence Container\Data Flow Task"
+          DTS:From="Package\Sequence Container\INSERT STG_PRODUCT"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
           DTS:To="Package\Sequence Container\Log Failure to Audit Log"
@@ -1533,80 +1529,88 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Data Flow Task"
-          TopLeft="76,141" />
+          Size="205,42"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT"
+          TopLeft="78,149" />
         <NodeLayout
-          Size="260,42"
-          Id="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
-          TopLeft="5.5,13" />
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="132.25,55">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,86"
-              Start="0,0"
-              End="0,78.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,78.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Sequence Container\Start Audit Log"
-          TopLeft="331,13" />
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
-          TopLeft="407,55">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-229,86"
-              Start="0,0"
-              End="-229,78.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,47.0727969348659" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,47.0727969348659"
-                    Point2="0,51.0727969348659"
-                    Point3="-4,51.0727969348659" />
-                  <mssgle:LineSegment
-                    End="-225,51.0727969348659" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-225,51.0727969348659"
-                    Point2="-229,51.0727969348659"
-                    Point3="-229,55.0727969348659" />
-                  <mssgle:LineSegment
-                    End="-229,78.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="148,42"
+          Id="Package\Sequence Container\End Audit Log"
+          TopLeft="102.5,346.509966777409" />
         <NodeLayout
           Size="210,42"
           Id="Package\Sequence Container\Expression Task End Time"
-          TopLeft="49,245" />
+          TopLeft="74,253" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Sequence Container\Log Failure to Audit Log"
+          TopLeft="332,149" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Sequence Container\Start Audit Log"
+          TopLeft="356,21" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Sequence Container\TRUNCATE TABLE STG PRODUCT"
+          TopLeft="13.5,24" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="145.583333333333,66">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="432,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-218.666666666667,86"
+              Start="0,0"
+              End="-218.666666666667,78.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.2003872216844" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.2003872216844"
+                    Point2="0,51.2003872216844"
+                    Point3="-4,51.2003872216844" />
+                  <mssgle:LineSegment
+                    End="-214.666666666667,51.2003872216844" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-214.666666666667,51.2003872216844"
+                    Point2="-218.666666666667,51.2003872216844"
+                    Point3="-218.666666666667,55.2003872216844" />
+                  <mssgle:LineSegment
+                    End="-218.666666666667,78.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
-          TopLeft="153.75,183">
+          TopLeft="179.75,191">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1626,13 +1630,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="148,42"
-          Id="Package\Sequence Container\End Audit Log"
-          TopLeft="77.5,338.509966777409" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
-          TopLeft="152.75,287">
+          TopLeft="177.75,295">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1652,75 +1652,75 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="195,42"
-          Id="Package\Sequence Container\Log Failure to Audit Log"
-          TopLeft="307,141" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
-          TopLeft="231,162">
+          TopLeft="283,170">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="76,0"
+              EndConnector="49,0"
               Start="0,0"
-              End="68.5,0">
+              End="41.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="68.5,0" />
+                    End="41.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="19.00865234375,5,30.4826953125,9.7490234375"
+              BoundingBox="5.50865234375,5,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="528,432"
-          Size="528,475"
+          PanelSize="545,444"
+          Size="545,487"
           Id="Package\Sequence Container"
-          TopLeft="324,144" />
+          TopLeft="316,89" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Sequence Container\Data Flow Task">
+    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="162,42"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT"
+          TopLeft="475,328" />
+        <NodeLayout
           Size="197,42"
-          Id="Package\Sequence Container\Data Flow Task\Flat File Source Product"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT\Flat File Source Product"
           TopLeft="464,47" />
         <NodeLayout
           Size="158,42"
-          Id="Package\Sequence Container\Data Flow Task\Derived Column"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT\Derived Column"
           TopLeft="476,234" />
         <NodeLayout
-          Size="162,42"
-          Id="Package\Sequence Container\Data Flow Task\STG_PRODUCT"
-          TopLeft="475,328" />
+          Size="133,42"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT\Row Count"
+          TopLeft="491,141" />
         <EdgeLayout
-          Id="Package\Sequence Container\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="555.5,276">
+          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Row Count Output 1]"
+          TopLeft="556.25,183">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52"
+              EndConnector="0,51"
               Start="0,0"
-              End="0,44.5">
+              End="0,43.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5" />
+                    End="0,43.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1729,12 +1729,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="133,42"
-          Id="Package\Sequence Container\Data Flow Task\Row Count"
-          TopLeft="491,141" />
         <EdgeLayout
-          Id="Package\Sequence Container\Data Flow Task.Paths[Flat File Source Output]"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Flat File Source Output]"
           TopLeft="560,89">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1756,19 +1752,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="556.25,183">
+          Id="Package\Sequence Container\INSERT STG_PRODUCT.Paths[Derived Column Output]"
+          TopLeft="555.5,276">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51"
+              EndConnector="0,52"
               Start="0,0"
-              End="0,43.5">
+              End="0,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.5" />
+                    End="0,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1780,8 +1776,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Sequence Container\INSERT STG_PRODUCT.EventHandlers[OnError]\Capture Error Message"
+          TopLeft="517,161" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\Data Flow Task\STG_PRODUCT">
+    design-time-name="Package\Sequence Container\INSERT STG_PRODUCT\STG_PRODUCT">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1793,17 +1801,5 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Data Flow Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="193,42"
-          Id="Package\Sequence Container\Data Flow Task.EventHandlers[OnError]\Capture Error Message"
-          TopLeft="517,161" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
